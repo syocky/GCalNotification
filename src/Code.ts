@@ -4,6 +4,7 @@ class Line {
   constructor(lineToken: string) {
     this.lineToken = lineToken;
   }
+
   /**
    * Googleカレンダー予定をLineへ通知する
    *
@@ -13,11 +14,11 @@ class Line {
    *  省略した場合は実行した日とする
    */
   notify(calIds?: string[], targetDate?: Date) {
-    if (!targetDate) {
-      targetDate = new Date();
-    }
-    const calendars: GoogleAppsScript.Calendar.Calendar[] = [];
-    if (calIds) {
+    calIds = calIds || [];
+    targetDate = targetDate || new Date();
+
+    let calendars: GoogleAppsScript.Calendar.Calendar[] = [];
+    if (calIds.length > 0) {
       for (const calId of calIds) {
         const calendar = CalendarApp.getCalendarById(calId);
         if (calendar != null) {
@@ -26,7 +27,7 @@ class Line {
       }
     } else {
       // GoogleカレンダーID未指定の場合は全カレンダーを対象とする
-      calendars.concat(CalendarApp.getAllCalendars());
+      calendars = CalendarApp.getAllCalendars();
     }
     if (calendars.length == 0) {
       // 有効なカレンダーがない場合は処理しない
