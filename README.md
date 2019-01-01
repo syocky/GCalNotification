@@ -1,0 +1,2 @@
+# GCalNotification
+GASでGoogleCanlendarの予定を通知するライブラリ
