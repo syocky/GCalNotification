@@ -22,7 +22,8 @@ Google Apps Script で Google カレンダーの予定（全カレンダー or �
 ## Usage
 
 1. Google Apps Script で本ライブラリを読み込む  
-   Google Apps Script メニュー --> リソース -> ライブラリ... -> プロジェクトキー"MnRX69mDwDCp0N2V3oekeTiOLEqDxVXCd"でライブラリを追加
+   Google Apps Script メニュー -> リソース -> ライブラリ... ->  
+   プロジェクトキー"MnRX69mDwDCp0N2V3oekeTiOLEqDxVXCd"でライブラリを追加
 2. Google Apps Script でのサンプル
 
 ```
@@ -35,7 +36,23 @@ Google Apps Script で Google カレンダーの予定（全カレンダー or �
   // 実行日の指定カレンダーを通知
   line.notify(['{カレンダーID}']);
   // 指定日の指定カレンダーを通知
-  line.notify(['{カレンダーID１}','カレンダーID２'], new Date(2019,1,2));
+  line.notify(['{カレンダーID１}','{カレンダーID２}'], new Date(2019,1,2));
+```
+
+通知メッセージのサンプル：
+
+```
+2019/01/01
+◆ カレンダー名１
+12:00 - 13:00 イベント名１１
+15:00 - 18:00 イベント名１２
+
+◆ カレンダー名２
+終日 イベント名２１
+09:00 - 11:00 イベント名２２
+
+◆ カレンダー名３
+予定なし
 ```
 
 ## Licence
