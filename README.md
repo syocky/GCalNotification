@@ -23,16 +23,17 @@ Google Apps Script で Google カレンダーの予定（全カレンダー or �
 
 1. Google Apps Script で本ライブラリを読み込む  
    Google Apps Script メニュー -> リソース -> ライブラリ... ->  
-   プロジェクトキー"MnRX69mDwDCp0N2V3oekeTiOLEqDxVXCd"でライブラリを追加
+   プロジェクトキー`MaktnbLazj7r5QbzfwhXh3Y2tGNWfZQAw`でライブラリを追加
 2. Google Apps Script でのサンプル
 
 ```
   // 通知先をLINE Notifyで行う
   var line = new GCalNotification.Line('{LINE Notifyアクセストークン}');
+
   // 実行日の全カレンダーを通知
   line.notify();
   // 指定日の全カレンダーを通知
-  line.notify([], new Date(2019,1,2));
+  line.notify(new Date(2019,1,2));
   // 実行日の指定カレンダーを通知
   line.notify(['{カレンダーID}']);
   // 指定日の指定カレンダーを通知

@@ -6,15 +6,39 @@ class Line {
   }
 
   /**
-   * Googleカレンダー予定をLineへ通知する
+   * 実行日の指定されたGoogleカレンダー予定をLineへ通知する
    *
    * @param calIds GoogleカレンダーIDの配列
-   *  省略した場合は全カレンダーを対象にする
-   * @param targetDate 指定日
-   *  省略した場合は実行した日とする
    */
-  notify(calIds?: string[], targetDate?: Date) {
-    calIds = calIds || [];
+  public notify(calIds: string[]): void;
+
+  /**
+   * 指定日の全Googleカレンダー予定をLineへ通知する
+   *
+   * @param targetDate 指定日
+   */
+  public notify(targetDate: Date): void;
+
+  /**
+   * 実行日の全カレンダー予定をLineへ通知する
+   */
+  public notify(): void;
+
+  /**
+   * Googleカレンダー予定をLineへ通知する
+   *
+   * @param anyValue GoogleカレンダーIDの配列 or 指定日
+   * @param targetDate 指定日
+   */
+  public notify(anyValue?: string[] | Date, targetDate?: Date): void {
+    let calIds: string[] = [];
+    if (anyValue) {
+      if (anyValue instanceof Array) {
+        calIds = anyValue;
+      } else if (anyValue instanceof Date) {
+        targetDate = anyValue;
+      }
+    }
     targetDate = targetDate || new Date();
 
     let calendars: GoogleAppsScript.Calendar.Calendar[] = [];
@@ -66,7 +90,7 @@ class NotifyMessage {
     this.calendarMsgs = calendarMsgs;
   }
 
-  getMessage(): string {
+  public getMessage(): string {
     let message: string =
       Utilities.formatDate(this.targetDate, 'JST', 'yyyy/MM/dd') + '\n';
     for (const calendarMsg of this.calendarMsgs) {
@@ -87,7 +111,7 @@ class NotifyCalendarMessage {
     this.calendarName = calendarName;
     this.events = events;
   }
-  getMessage(): string {
+  public getMessage(): string {
     let message: string = '◆ ' + this.calendarName + '\n';
     if (this.events.length == 0) {
       message += '予定なし' + '\n';
